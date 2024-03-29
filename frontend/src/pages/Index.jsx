@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { RxCross2 } from "react-icons/rx";
 
 const Index = () => {
+
+    const [show, setShow] = useState(false)
+
+
+
     return (
 <div className='bg-[#18191b] min-h-screen w-full '>
+
+    <div className={`w-screen ${show ? 'visible opacity-30' : 'invisible opacity-30'} transition-all duration-500 h-screen fixed bg-[#252627ad] flex justify-center items-center `}>
+        <div className='w-[350px] m-auto px-6 py-4 rounded-md relative'>
+            <div onClick={() => setShow(false)} className='absolute right-4 top-4 text-xl cursor-pointer text-white'><RxCross2 /></div>
+        </div>
+
+    </div>
+
+
+
+
+
+
     <div className='bg-[#212223] shadow-md'>
         <div className='w-[93%] m-auto py-3'>
     <div className='flex justify-between items-center'>
@@ -11,7 +30,10 @@ const Index = () => {
         </div>
 
     <div className='flex gap-4'>
-        <button className='py-2 w-[80px] text-center bg-teal-700 text-white transition-all hover:bg-teal-500 rounded-[5px] font-medium'>SingIn</button>
+       
+        <button onClick={() => setShow(true) } className='py-2 w-[80px] text-center bg-teal-700 text-white transition-all hover:bg-teal-500 rounded-[5px] font-medium'>SingIn</button>
+
+
         <button className='py-2 w-[80px] text-center bg-purple-700 text-white transition-all hover:bg-purple-500 rounded-[5px] font-medium'>SingUp</button>
 
     </div> 
