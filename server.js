@@ -6,7 +6,7 @@ const cors = require('cors')
 const path = require('path')
 
 dotenv.config()
-
+ 
 if (process.env.NODE_ENV === 'local') {
     app.use(cors({
         origin: 'http://localhost:3000',
