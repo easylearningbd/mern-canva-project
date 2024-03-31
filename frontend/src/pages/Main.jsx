@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { LuLayoutTemplate } from "react-icons/lu";
 import { FaCloudUploadAlt } from "react-icons/fa";
@@ -46,6 +46,15 @@ const Main = () => {
         setCurrentComponent: (a) => setCurrentComponent(a)
         }
     ])
+
+    useEffect(() => {
+        if (current_component) {
+            const index = components.findIndex(c => c.id === current_component.id)
+            components[index].color = color || current_component.color
+
+        }
+
+    },[color])
 
     const moveElement = () => {
         console.log('move element')
