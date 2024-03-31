@@ -82,6 +82,15 @@ const Main = () => {
         console.log('removeComponent')
     }
 
+    const remove_background = () => {
+        const com = components.find(c => c.id === current_component.id)
+        const temp = components.filter(c => c.id !== current_component.id)
+        com.image = ''
+        setImage("")
+        setComponents([...temp,com ])
+
+    }
+
 
     return (
 <div className='min-w-screen h-screen bg-black'>
@@ -202,9 +211,13 @@ const Main = () => {
                 <div className='flex gap-4 justify-start items-start mt-4'>
                 <span>Color :</span>
                 <label className='w-[30px] h-[30px] cursor-pointer rounded-sm' style={{ background: `${current_component.color && current_component.color !== '#fff' ? current_component.color : 'gray' }` }}  htmlFor="color"></label>
-                <input onChange={(e) => setColor(e.target.value)} type="color" className='invisible'  id="color" />
-
+                <input onChange={(e) => setColor(e.target.value)} type="color" className='invisible'  id="color" /> 
                 </div>
+            {
+                (current_component.name === 'main_frame' && current_component.image) && <div className='p-[6px] bg-slate-600 text-white cursor-pointer' onClick={remove_background}>
+                    Remove Background
+                </div>
+            }
 
             </div>
 
