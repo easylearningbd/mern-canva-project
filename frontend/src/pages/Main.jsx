@@ -20,6 +20,7 @@ const Main = () => {
     const [state, setState] = useState('')
     const [current_component , setCurrentComponent] = useState('')
     const [color, setColor] = useState('')
+    const [image, setImage] = useState('')
 
     const [show, setShow] = useState({
         status: true,
@@ -50,11 +51,20 @@ const Main = () => {
     useEffect(() => {
         if (current_component) {
             const index = components.findIndex(c => c.id === current_component.id)
+
+            const temp =  components.filter(c => c.id !== current_component.id)
+
+            if (current_component.name === 'main_frame' && image) {
+                components[index].image = image || current_component.image
+            }
+
             components[index].color = color || current_component.color
+
+            setComponents([...temp,components[index]])
 
         }
 
-    },[color])
+    },[color,image])
 
     const moveElement = () => {
         console.log('move element')
@@ -161,7 +171,7 @@ const Main = () => {
                 state === 'background' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'>
            <div className='grid grid-cols-2 gap-2'>
             {
-                [1,2,3,4,5,6].map((img, i) => <div key={i} className='w-full h-[90px] overflow-hidden rounded-sm cursor-pointer'>
+                [1,2,3,4,5,6].map((img, i) => <div onClick={() => setImage('http://localhost:5173/canva.png') } key={i} className='w-full h-[90px] overflow-hidden rounded-sm cursor-pointer'>
                 <img className='w-full h-full object-fill' src="http://localhost:5173/canva.png" alt="" />
                 </div>
                 )
