@@ -10,7 +10,7 @@ const CreateComponent = ({ info, current_component}) => {
             height: info.height + 'px',
             background: info.color,
             zIndex: info.z_index
-        }}>
+        }}> 
             {
                 info.image && <img className='w-full h-full' src={info.image} alt='image' />
             }
