@@ -19,6 +19,8 @@ const Main = () => {
 
     const [state, setState] = useState('')
     const [current_component , setCurrentComponent] = useState('')
+    const [color, setColor] = useState('')
+
     const [show, setShow] = useState({
         status: true,
         name:''
@@ -174,6 +176,26 @@ const Main = () => {
             </div>
 
         </div>
+
+    {
+        current_component && <div className='h-full w-[250px] text-gray-300 bg-[#252627] px-3 py-2'>
+            <div className='flex gap-6 flex-col items-start h-full px-3 justify-start'>
+                <div className='flex gap-4 justify-start items-start mt-4'>
+                <span>Color :</span>
+                <label className='w-[30px] h-[30px] cursor-pointer rounded-sm' style={{ background: `${current_component.color && current_component.color !== '#fff' ? current_component.color : 'gray' }` }}  htmlFor="color"></label>
+                <input onChange={(e) => setColor(e.target.value)} type="color" className='invisible'  id="color" />
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+
+
+
+
         
     </div>    
 
