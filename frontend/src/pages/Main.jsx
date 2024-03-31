@@ -9,6 +9,7 @@ import { BsImages } from "react-icons/bs";
 import { RxTransparencyGrid } from "react-icons/rx";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import TemplateDesign from '../components/main/TemplateDesign';
+import MyImages from '../components/MyImages';
 
 
 const Main = () => {
@@ -86,14 +87,15 @@ const Main = () => {
                 </div>
             }
             {
-                state === 'shape' && <div>
-                    shape
+                state === 'shape' && <div className='grid grid-cols-3 gap-2'>
+                    <div className='h-[90px] bg-[#3c3c3d] cursor-pointer'></div>
+                    <div className='h-[90px] bg-[#3c3c3d] cursor-pointer rounded-full'></div>
+                    <div style={{clipPath: 'polygon(50% 0, 100% 100%, 0 100%'}} className='h-[90px] bg-[#3c3c3d] cursor-pointer  '></div>
+                    
                 </div>
             }
             {
-                state === 'image' && <div>
-                    image
-                </div>
+                state === 'image' && <MyImages/>  
             }
             {
                 state === 'text' && <div>
