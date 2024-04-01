@@ -79,8 +79,10 @@ const Main = () => {
         console.log('rotate element')
     }
 
-    const removeComponent = () => {
-        console.log('removeComponent')
+    const removeComponent = (id) => {
+         const temp = components.filter(c => c.id !== id)
+         setCurrentComponent('')
+         setComponents(temp)
     }
 
     const remove_background = () => {
