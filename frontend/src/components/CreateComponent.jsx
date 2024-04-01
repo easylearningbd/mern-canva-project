@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaTrashAlt } from "react-icons/fa";
+import Element from './Element';
 
 const CreateComponent = ({ info, current_component,removeComponent}) => {
      console.log(info)
@@ -34,7 +35,7 @@ const CreateComponent = ({ info, current_component,removeComponent}) => {
          }} 
          className='absolute group hover:border-[2px] hover:border-indigo-500' 
          >
-
+            <Element id={randValue} info={info} exId="" />
             {
                 current_component.id === info.id && <div onClick={() => removeComponent(info.id)} className='px-3 py-2 bg-white absolute top-0 hidden group-hover:block cursor-pointer rounded-md'>
                     <FaTrashAlt />
@@ -62,7 +63,7 @@ const CreateComponent = ({ info, current_component,removeComponent}) => {
          }} >
 
             </div>
-
+            <Element id={randValue} info={info} exId={`${randValue}c`} />
             {
                 current_component.id === info.id && <div onClick={() => removeComponent(info.id)} className='px-3 py-2 bg-white absolute top-0 hidden group-hover:block cursor-pointer rounded-md'>
                     <FaTrashAlt />
@@ -92,7 +93,7 @@ const CreateComponent = ({ info, current_component,removeComponent}) => {
          }} >
 
             </div>
-
+            <Element id={randValue} info={info} exId={`${randValue}t`} />
             {
                 current_component.id === info.id && <div onClick={() => removeComponent(info.id)} className='px-3 py-2 bg-white absolute top-0 hidden group-hover:block cursor-pointer rounded-md'>
                     <FaTrashAlt />
