@@ -67,8 +67,25 @@ const Main = () => {
 
     },[color,image])
 
-    const moveElement = () => {
-        console.log('move element')
+    const moveElement = (id, currentInfo) => {
+        setCurrentComponent(currentInfo)
+        let isMoving = true
+
+        const currentDiv = document.getElementById(id)
+
+        const mouseMove = () => {
+            const getStyle = window.getComputedStyle(currentDiv)
+        }
+
+        const mouseUp = () => {
+            
+        }
+
+
+        window.addEventListener('mousemove',mouseMove)
+        window.addEventListener('mouseup',mouseUp)
+
+
     }
 
     const resizeElement = () => {
