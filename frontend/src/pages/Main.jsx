@@ -22,6 +22,8 @@ const Main = () => {
     const [color, setColor] = useState('')
     const [image, setImage] = useState('')
     const [rotate, setRotate] = useState(0)
+    const [left, setLeft] = useState('')
+    const [top, setTop] = useState('')
 
     const [show, setShow] = useState({
         status: true,
@@ -73,19 +75,26 @@ const Main = () => {
 
         const currentDiv = document.getElementById(id)
 
-        const mouseMove = () => {
+        const mouseMove = ({ movementX,movementY }) => {
             const getStyle = window.getComputedStyle(currentDiv)
+            const left = parseInt(getStyle.left) 
+            const top = parseInt(getStyle.top) 
+            if (isMoving) {
+                currentDiv.style.left = `${left + movementX}px`
+                currentDiv.style.top = `${top + movementY}px`
+            } 
         }
 
-        const mouseUp = () => {
-            
+        const mouseUp = (e) => {
+            let isMoving = false
+            window.addEventListener('mousemove',mouseMove)
+            window.addEventListener('mouseup',mouseUp)
+            setLeft(parseInt(currentDiv.style.left))
+            setTop(parseInt(currentDiv.style.top))
         }
-
-
+ 
         window.addEventListener('mousemove',mouseMove)
-        window.addEventListener('mouseup',mouseUp)
-
-
+        window.addEventListener('mouseup',mouseUp) 
     }
 
     const resizeElement = () => {
