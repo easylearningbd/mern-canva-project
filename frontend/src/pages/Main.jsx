@@ -61,13 +61,22 @@ const Main = () => {
                 components[index].image = image || current_component.image
             }
 
+            if (current_component.name !== 'main_frame') {
+                components[index].left = left || current_component.left
+                components[index].top = top || current_component.top
+            }
+
             components[index].color = color || current_component.color
 
             setComponents([...temp,components[index]])
+            
+            setColor('')
+            setLeft('')
+            setTop('')
 
         }
 
-    },[color,image])
+    },[color,image,left,top])
 
     const moveElement = (id, currentInfo) => {
         setCurrentComponent(currentInfo)
@@ -87,8 +96,8 @@ const Main = () => {
 
         const mouseUp = (e) => {
             let isMoving = false
-            window.addEventListener('mousemove',mouseMove)
-            window.addEventListener('mouseup',mouseUp)
+            window.removeEventListener('mousemove',mouseMove)
+            window.removeEventListener('mouseup',mouseUp)
             setLeft(parseInt(currentDiv.style.left))
             setTop(parseInt(currentDiv.style.top))
         }
