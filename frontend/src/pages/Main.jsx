@@ -136,8 +136,8 @@ const Main = () => {
             let isMoving = false
             window.removeEventListener('mousemove',mouseMove)
             window.removeEventListener('mouseup',mouseUp)
-            setLeft(parseInt(currentDiv.style.left))
-            setTop(parseInt(currentDiv.style.top))
+            setWidth(parseInt(currentDiv.style.width))
+            setHeight(parseInt(currentDiv.style.height))
         }
  
         window.addEventListener('mousemove',mouseMove)
