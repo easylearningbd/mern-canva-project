@@ -24,6 +24,8 @@ const Main = () => {
     const [rotate, setRotate] = useState(0)
     const [left, setLeft] = useState('')
     const [top, setTop] = useState('')
+    const [width, setWidth] = useState('')
+    const [height, setHeight] = useState('')
 
     const [show, setShow] = useState({
         status: true,
@@ -57,6 +59,11 @@ const Main = () => {
 
             const temp =  components.filter(c => c.id !== current_component.id)
 
+        if (current_component.name !== 'text') {
+            components[index].width = width || current_component.width
+            components[index].height = height || current_component.height
+        }
+
             if (current_component.name === 'main_frame' && image) {
                 components[index].image = image || current_component.image
             }
@@ -73,10 +80,12 @@ const Main = () => {
             setColor('')
             setLeft('')
             setTop('')
+            setWidth('')
+            setHeight('')
 
         }
 
-    },[color,image,left,top])
+    },[color,image,left,top,width,height])
 
     const moveElement = (id, currentInfo) => {
         setCurrentComponent(currentInfo)
@@ -106,9 +115,35 @@ const Main = () => {
         window.addEventListener('mouseup',mouseUp) 
     }
 
-    const resizeElement = () => {
-        console.log('resize element')
+
+    const resizeElement = (id, currentInfo) => {
+        setCurrentComponent(currentInfo)
+        let isMoving = true
+
+        const currentDiv = document.getElementById(id)
+
+        const mouseMove = ({ movementX,movementY }) => {
+            const getStyle = window.getComputedStyle(currentDiv)
+            const width = parseInt(getStyle.width) 
+            const height = parseInt(getStyle.height) 
+            if (isMoving) {
+                currentDiv.style.width = `${width + movementX}px`
+                currentDiv.style.height = `${height + movementY}px`
+            } 
+        }
+
+        const mouseUp = (e) => {
+            let isMoving = false
+            window.removeEventListener('mousemove',mouseMove)
+            window.removeEventListener('mouseup',mouseUp)
+            setLeft(parseInt(currentDiv.style.left))
+            setTop(parseInt(currentDiv.style.top))
+        }
+ 
+        window.addEventListener('mousemove',mouseMove)
+        window.addEventListener('mouseup',mouseUp) 
     }
+    
 
     const rotateElement = () => {
         console.log('rotate element')
