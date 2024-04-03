@@ -72,6 +72,12 @@ const Main = () => {
             components[index].rotate = rotate || current_component.rotate
         }
 
+        if (current_component.name === 'text') {
+            components[index].font = font || current_component.font
+            components[index].padding = padding || current_component.padding
+            components[index].weight = weight || current_component.weight
+        }
+
             if (current_component.name === 'main_frame' && image) {
                 components[index].image = image || current_component.image
             }
@@ -98,7 +104,7 @@ const Main = () => {
 
         }
 
-    },[color,image,left,top,width,height,opacity,zIndex])
+    },[color,image,left,top,width,height,opacity,zIndex,padding,font,weight])
 
     const moveElement = (id, currentInfo) => {
         setCurrentComponent(currentInfo)
@@ -408,6 +414,26 @@ const Main = () => {
                 <span className='text-md w-[70px]'>Z-Index</span>
             <input onChange={(e) => setzIndex(parseInt(e.target.value))} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={1} value={current_component.z_index}  />
             </div>
+
+
+    {
+        current_component.name === 'text' && <>
+        <div className='flex gap-1 justify-start items-start'>
+                <span className='text-md w-[70px]'>Padding : </span>
+            <input onChange={(e) => setPadding(parseInt(e.target.value))} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={1} value={current_component.padding}  />
+            </div>
+
+            <div className='flex gap-1 justify-start items-start'>
+                <span className='text-md w-[70px]'>Font Size</span>
+            <input onChange={(e) => setFont(parseInt(e.target.value))} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={1} value={current_component.font}  />
+            </div>
+
+            <div className='flex gap-1 justify-start items-start'>
+                <span className='text-md w-[70px]'>Weight : </span>
+            <input onChange={(e) => setWeight(parseInt(e.target.value))} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={100} min={100} max={900} value={current_component.weight}  />
+            </div> 
+        </>
+    }        
 
         </div>
 
