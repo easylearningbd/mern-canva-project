@@ -32,6 +32,7 @@ const Main = () => {
     const [weight, setWeight] = useState('')
     const [text, setText] = useState('')
     const [opacity, setOpacity] = useState('')
+    const [zIndex, setzIndex] = useState('')
 
     const [show, setShow] = useState({
         status: true,
@@ -79,6 +80,7 @@ const Main = () => {
                 components[index].left = left || current_component.left
                 components[index].top = top || current_component.top
                 components[index].opacity = opacity || current_component.opacity
+                components[index].z_index = zIndex || current_component.z_index
             }
 
             components[index].color = color || current_component.color
@@ -92,10 +94,11 @@ const Main = () => {
             setHeight('')
             setRotate(0)
             setOpacity('')
+            setzIndex('')
 
         }
 
-    },[color,image,left,top,width,height,opacity])
+    },[color,image,left,top,width,height,opacity,zIndex])
 
     const moveElement = (id, currentInfo) => {
         setCurrentComponent(currentInfo)
@@ -395,10 +398,15 @@ const Main = () => {
             }
 
     {
-        current_component.name !== 'main_frame' && <div className='flex gap-6'>
+        current_component.name !== 'main_frame' && <div className='flex gap-6 flex-col'>
             <div className='flex gap-1 justify-start items-start'>
                 <span className='text-md w-[70px]'>Opacity</span>
             <input onChange={opacityHandle} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={0.1} min={0.1} max={1} value={current_component.opacity}  />
+            </div>
+
+            <div className='flex gap-1 justify-start items-start'>
+                <span className='text-md w-[70px]'>Z-Index</span>
+            <input onChange={(e) => setzIndex(parseInt(e.target.value))} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={1} value={current_component.z_index}  />
             </div>
 
         </div>
