@@ -62,6 +62,7 @@ const Main = () => {
         if (current_component.name !== 'text') {
             components[index].width = width || current_component.width
             components[index].height = height || current_component.height
+            components[index].rotate = rotate || current_component.rotate
         }
 
             if (current_component.name === 'main_frame' && image) {
@@ -82,6 +83,7 @@ const Main = () => {
             setTop('')
             setWidth('')
             setHeight('')
+            setRotate(0)
 
         }
 
@@ -155,19 +157,32 @@ const Main = () => {
             const trans = getStyle.transform
              
             const values = trans.split('(')[1].split(')')[0].split(',')
-            console.log(values)
+            const angle = Math.round(Math.atan2(values[1], values[0]) * (180 / Math.PI))
+
+            let deg = angle < 0 ? angle + 360 : angle
+            if (movementX) {
+                deg = deg + movementX
+            }
+            target.style.transform = `rotate(${deg}deg)`
+
         }
 
 
         const mouseUp = (e) => {
-            // let isMoving = false
-            // window.removeEventListener('mousemove',mouseMove)
-            // window.removeEventListener('mouseup',mouseUp)
-            // setWidth(parseInt(currentDiv.style.width))
-            // setHeight(parseInt(currentDiv.style.height))
-        }
+           
+            window.removeEventListener('mousemove',mouseMove)
+            window.removeEventListener('mouseup',mouseUp)
 
+            const getStyle = window.getComputedStyle(target)
+            const trans = getStyle.transform
+             
+            const values = trans.split('(')[1].split(')')[0].split(',')
+            const angle = Math.round(Math.atan2(values[1], values[0]) * (180 / Math.PI))
 
+            let deg = angle < 0 ? angle + 360 : angle
+            setRotate(deg)
+
+        } 
         window.addEventListener('mousemove',mouseMove)
         window.addEventListener('mouseup',mouseUp) 
     }
