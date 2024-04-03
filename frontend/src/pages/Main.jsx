@@ -31,6 +31,7 @@ const Main = () => {
     const [font, setFont] = useState('')
     const [weight, setWeight] = useState('')
     const [text, setText] = useState('')
+    const [opacity, setOpacity] = useState('')
 
     const [show, setShow] = useState({
         status: true,
@@ -77,6 +78,7 @@ const Main = () => {
             if (current_component.name !== 'main_frame') {
                 components[index].left = left || current_component.left
                 components[index].top = top || current_component.top
+                components[index].opacity = opacity || current_component.opacity
             }
 
             components[index].color = color || current_component.color
@@ -89,10 +91,11 @@ const Main = () => {
             setWidth('')
             setHeight('')
             setRotate(0)
+            setOpacity('')
 
         }
 
-    },[color,image,left,top,width,height])
+    },[color,image,left,top,width,height,opacity])
 
     const moveElement = (id, currentInfo) => {
         setCurrentComponent(currentInfo)
@@ -207,6 +210,10 @@ const Main = () => {
 
     }
 
+    const opacityHandle = (e) => {
+        setOpacity(parseFloat(e.target.value))
+    }
+
     const createShape = (name, type) => {
         const style = {
             id: Date.now(),
@@ -256,6 +263,8 @@ const Main = () => {
         setCurrentComponent(style)
         setComponents([...components, style])
     }
+
+
 
 
     return (
@@ -385,6 +394,19 @@ const Main = () => {
                 </div>
             }
 
+    {
+        current_component.name !== 'main_frame' && <div className='flex gap-6'>
+            <div className='flex gap-1 justify-start items-start'>
+                <span className='text-md w-[70px]'>Opacity</span>
+            <input onChange={opacityHandle} className='w-[70px] border border-gray-700 bg-transparent outline-none px-2 rounded-md' type="number" step={0.1} min={0.1} max={1} value={current_component.opacity}  />
+            </div>
+
+        </div>
+
+    }
+        
+        
+        
             </div>
 
         </div>
