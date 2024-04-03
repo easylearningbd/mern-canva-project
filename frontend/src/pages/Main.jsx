@@ -27,6 +27,11 @@ const Main = () => {
     const [width, setWidth] = useState('')
     const [height, setHeight] = useState('')
 
+    const [padding, setPadding] = useState('')
+    const [font, setFont] = useState('')
+    const [weight, setWeight] = useState('')
+    const [text, setText] = useState('')
+
     const [show, setShow] = useState({
         status: true,
         name:''
@@ -225,6 +230,34 @@ const Main = () => {
     }
 
 
+    const add_text = (name, type) => {
+        const style = {
+            id: Date.now(),
+            name: name,
+            type,
+            left: 10,
+            top: 10,
+            opacity: 1, 
+            rotate,
+            z_index: 10,
+            padding: 6,
+            font: 22,
+            title: 'Add Your Text',
+            weight: 400,
+            color: '#3c3c3d',
+            setCurrentComponent: (a) => setCurrentComponent(a),
+            moveElement,
+            resizeElement,
+            rotateElement
+
+        }
+        setWeight('')
+        setFont('')
+        setCurrentComponent(style)
+        setComponents([...components, style])
+    }
+
+
     return (
 <div className='min-w-screen h-screen bg-black'>
     <Header/>
@@ -295,7 +328,7 @@ const Main = () => {
             {
                 state === 'text' && <div>
                     <div className='grid grid-cols-1 gap-2'>
-                    <div className='bg-[#3c3c3d] cursor-pointer font-bold p-3 text-white text-xl rounded-sm'>
+                    <div onClick={() => add_text('text','title')} className='bg-[#3c3c3d] cursor-pointer font-bold p-3 text-white text-xl rounded-sm'>
                     <h2>Add A Text </h2>
                     </div>
                     </div>
