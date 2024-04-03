@@ -145,8 +145,31 @@ const Main = () => {
     }
     
 
-    const rotateElement = () => {
-        console.log('rotate element')
+    const rotateElement = (id, currentInfo) => {
+        setCurrentComponent("")
+        setCurrentComponent(currentInfo)
+        const target = document.getElementById(id)
+
+        const mouseMove = ({ movementX,movementY }) => {
+            const getStyle = window.getComputedStyle(target)
+            const trans = getStyle.transform
+             
+            const values = trans.split('(')[1].split(')')[0].split(',')
+            console.log(values)
+        }
+
+
+        const mouseUp = (e) => {
+            // let isMoving = false
+            // window.removeEventListener('mousemove',mouseMove)
+            // window.removeEventListener('mouseup',mouseUp)
+            // setWidth(parseInt(currentDiv.style.width))
+            // setHeight(parseInt(currentDiv.style.height))
+        }
+
+
+        window.addEventListener('mousemove',mouseMove)
+        window.addEventListener('mouseup',mouseUp) 
     }
 
     const removeComponent = (id) => {
