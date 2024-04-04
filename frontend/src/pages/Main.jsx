@@ -34,6 +34,8 @@ const Main = () => {
     const [opacity, setOpacity] = useState('')
     const [zIndex, setzIndex] = useState('')
 
+    const [radius, setRadius] = useState(0)
+
     const [show, setShow] = useState({
         status: true,
         name:''
@@ -276,6 +278,32 @@ const Main = () => {
     }
 
 
+    const add_image = (img) => {
+        setCurrentComponent('')
+        const style = {
+            id: Date.now(),
+            name: 'image',
+            type: 'image',
+            left: 10,
+            top: 10,
+            opacity: 1, 
+            width: 200,
+            height: 150,
+            rotate,
+            z_index: 2,
+            radius: 0,
+            image: img, 
+            setCurrentComponent: (a) => setCurrentComponent(a),
+            moveElement,
+            resizeElement,
+            rotateElement
+
+        }
+        
+        setCurrentComponent(style)
+        setComponents([...components, style])
+    }
+
 
 
     return (
@@ -359,7 +387,7 @@ const Main = () => {
             }
             {
                 state === 'initImage' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'>
-                    <Image/>
+                    <Image add_image={add_image} />
                 </div>
             }
             {
