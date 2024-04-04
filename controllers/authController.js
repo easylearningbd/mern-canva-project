@@ -38,6 +38,40 @@ class authController {
     }
     // End Method 
 
+    user_login = async (req, res) => {
+       let { email, password } = req.body
+       try {
+        const user = await userModel.findOne({ email }).select('+password')
+
+        if (user) {
+            const match = await bcrypt.compare(password, user.password)
+
+            if (match) {
+                const token = await jwt.sign({
+                    name: user.name,
+                    email: user.email,
+                    _id: user.id
+                }, 'ariyan',{
+                    expiresIn: '2d'
+                })
+            return res.status(200).json({message: "User Singn Success",token})
+            } else {
+                return res.status(404).json({message: "Password Invalid" })
+            }
+
+        } else {
+            return res.status(404).json({message: "Email Does not Exit" })
+        }
+
+       } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({ message: "Internal Server Error" })
+       }
+
+    }
+     // End Method 
+
+
 }
 
 module.exports = new authController()

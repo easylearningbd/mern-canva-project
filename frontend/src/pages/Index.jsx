@@ -31,14 +31,38 @@ const Index = () => {
         try {
              setLoader(true)
              const { data } = await api.post('/api/user-register',state)
-             setLoader(false)
-             console.log(data)
+             setLoader(false) 
              localStorage.setItem('canva_token',data.token)
              setState({
                 name: '',
                 email: '',
                 password: ''
              })
+            window.location.href = '/'
+
+        } catch (error) {
+            setLoader(false)
+            console.log(error.response)
+        }
+        
+    }
+    //end method 
+
+
+    const user_login = async (e) => {
+        e.preventDefault()
+
+        try {
+             setLoader(true)
+             const { data } = await api.post('/api/user-login',state)
+             setLoader(false)
+             
+             localStorage.setItem('canva_token',data.token)
+             setState({ 
+                email: '',
+                password: ''
+             })
+            
             window.location.href = '/'
 
         } catch (error) {
@@ -59,7 +83,7 @@ const Index = () => {
            <h2 className='text-white pb-4 text-center text-xl'>Login and Sign up in seconds</h2>
           
           {
-            type === 'signin' && <form>
+            type === 'signin' && <form onSubmit={user_login}>
             <div className='flex flex-col gap-3 mb-3 text-white'>
                 <label htmlFor="email">Email</label>
                 <input onChange={inputHandle} type="email" name="email" id="email" placeholder='email' value={state.email} className='px-3 py-2 rounded-md border outline-none border-[#5c5c5e] focus:border-purple-500 bg-transparent' />
