@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { BiLogoGmail } from "react-icons/bi";
 import { FaFacebook } from "react-icons/fa";
+import api from '../utils/api';
 
 const Index = () => {
 
@@ -28,9 +29,20 @@ const Index = () => {
         e.preventDefault()
 
         try {
-            
+             setLoader(true)
+             const { data } = await api.post('/api/user-register',state)
+             setLoader(false)
+             localStorage.setItem('canva_token',data.token)
+             setState({
+                name: '',
+                email: '',
+                password: ''
+             })
+            window.location.href = '/'
+
         } catch (error) {
-            
+            setLoader(false)
+            console.log(error.response)
         }
         
     }
