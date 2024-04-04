@@ -131,6 +131,36 @@ const CreateComponent = ({ info, current_component,removeComponent}) => {
     }
 
 
+    if (info.name === 'image') {
+        html = <div id={randValue} onClick={() => info.setCurrentComponent(info)} style={{  
+            left: info.left + 'px',
+            top: info.top + 'px',
+            zIndex: info.z_index,
+            opacity: info.opacity,
+            transform: info.rotate ? `rotate(${info.rotate}deg)` : 'rotate(0deg)'
+         }} 
+         className='absolute group hover:border-[2px] hover:border-indigo-500' 
+         >
+            
+            <Element id={randValue} info={info} exId={`${randValue}img`} />
+            <div className='overflow-hidden' id={`${randValue}img`} style={{
+                width: info.width + 'px',
+                height: info.height + 'px',
+                borderRadius: `${info.radius}%`
+            }}>
+                <img className='w-full h-full' src={info.image} alt="image" />
+            </div>
+
+            {
+                current_component.id === info.id && <div onClick={() => removeComponent(info.id)} className='px-3 py-2 bg-white absolute top-0 hidden group-hover:block cursor-pointer rounded-md'>
+                    <FaTrashAlt />
+                </div>
+            }
+
+        </div>
+    }
+
+
 
 
     return html
