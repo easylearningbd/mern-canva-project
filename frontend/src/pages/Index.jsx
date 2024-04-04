@@ -32,6 +32,7 @@ const Index = () => {
              setLoader(true)
              const { data } = await api.post('/api/user-register',state)
              setLoader(false)
+             console.log(data)
              localStorage.setItem('canva_token',data.token)
              setState({
                 name: '',
