@@ -30,11 +30,11 @@ const CreateDesign = () => {
 
         if (image) {
             const formData = new FormData()
-            formData.append('desing',design)
+            formData.append('design',design)
             formData.append('image',image)
             try {
              setLoader(true)
-             const {data} = await api.post('/api/cerate-user-design',formData)
+             const {data} = await api.post('/api/create-user-design',formData)
              navigate(`/design/${data.design._id}/edit`)
              setLoader(false)                
             } catch (error) {
