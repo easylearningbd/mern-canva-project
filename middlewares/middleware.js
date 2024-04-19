@@ -7,7 +7,7 @@ const auth = async(req,res,next) => {
         if (token) {
             try {
                 const userInfo = await jwt.verify(token,'ariyan')
-                req.userInfo = userInfo
+                req.userInfo = userInfo 
                 next()
             } catch (error) {
                 return res.status(401).json({ message: 'unauthorized'})
