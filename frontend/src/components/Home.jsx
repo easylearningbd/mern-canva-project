@@ -61,7 +61,7 @@ const Home = () => {
              Custom Size 
             </button>
 
-<form className={`absolute top-16 right-3 gap-3 bg-[#252627] w-[250px] p-4 text-white ${show ? 'visible opacity-100' : 'invisible opacity-50'} transition-all duration-500`}>
+<form onSubmit={create} className={`absolute top-16 right-3 gap-3 bg-[#252627] w-[250px] p-4 text-white ${show ? 'visible opacity-100' : 'invisible opacity-50'} transition-all duration-500`}>
     <div className='grid grid-cols-2 pb-4 gap-3'>
         <div className='flex gap-2 justify-center items-start flex-col'>
             <label htmlFor="width">Width</label>
@@ -74,7 +74,7 @@ const Home = () => {
         </div> 
     </div>
 
-    <button onClick={create} className='px-4 py-2 text-[15px] overflow-hidden text-center bg-[#32769ead] text-white rounded-[3px] font-medium hover:bg-[#1e830f] w-full'>
+    <button className='px-4 py-2 text-[15px] overflow-hidden text-center bg-[#32769ead] text-white rounded-[3px] font-medium hover:bg-[#1e830f] w-full'>
             Create New Design
       </button>
 

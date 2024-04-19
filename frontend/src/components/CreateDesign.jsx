@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import * as htmlToImage from 'html-to-image'
 import { useLocation } from 'react-router-dom';
 import CreateComponent from './CreateComponent';
+import RotateLoader from 'react-spinners/RotateLoader'
+import api from '../utils/api'
 
 const CreateDesign = () => {
 
@@ -16,13 +19,20 @@ const CreateDesign = () => {
         z_index: 1,
         color: 'green',
         image: ""
-    }
+    } 
+
+    const [loader, setLoader] = useState(false)
 
     return (
         <div className='w-screen h-screen flex justify-center items-center relative'>
             <div ref={ref} className='relative w-auto h-auto overflow-auto'>
         <CreateComponent info={obj}  current_component={{}} />
             </div>
+            {
+               loader && <div className='left-0 top-0 w-full h-full flex justify-center items-center bg-black absolute'>
+                <RotateLoader color='white'/>
+               </div> 
+            }
         </div>
     );
 };
