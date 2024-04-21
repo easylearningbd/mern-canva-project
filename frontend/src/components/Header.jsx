@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as htmlToImage from 'html-to-image'
+import api from '../utils/api'
 
-const Header = () => {
+const Header = ({components,design_id}) => {
 
+  const [loader, setLoader] = useState(false) 
 
+  const saveImage  = async () => {
+
+    const getDiv = document.getElementById('main_design')
+    const image = await htmlToImage.toBlob(getDiv) 
+    
+    if (image) {
+
+        const obj = {
+          design: components
+        }
+        console.log(obj)
+ 
+        const formData = new FormData()
+        formData.append('design',JSON.stringify(obj))
+        formData.append('image',image)
+        try {
+         setLoader(true)
+         const {data} = await api.put(`/api/update-user-design/${design_id}`,formData)
+         
+         setLoader(false)                
+        } catch (error) {
+            setLoader(false)  
+            console.log(error.response.data)
+        }
+    }
+}
 
   const downloadImage = async () => {
 
@@ -35,7 +63,8 @@ const Header = () => {
             <span className='text-xl'>Easy Canva</span>
 
             <div className='flex justify-center items-center gap-2 text-gray-200'>
-        <button className='px-3 py-[6px] outline-none bg-[#7482f6] rounded-md'> Save </button>
+        <button disabled={loader} onClick={saveImage} className='px-3 py-[6px] outline-none bg-[#7482f6] rounded-md'> {loader ? 'Loading..' : 'Save'}</button>
+
         <button onClick={downloadImage} className='px-3 py-[6px] outline-none bg-[#a855f7] rounded-md'> Download </button>
             </div>
 

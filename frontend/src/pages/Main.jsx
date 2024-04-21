@@ -339,7 +339,7 @@ const Main = () => {
 
     return (
 <div className='min-w-screen h-screen bg-black'>
-    <Header/>
+    <Header components={components} design_id={design_id} />
 
     <div className='flex h-[calc(100%-60px)] w-screen'>
         <div className='w-[80px] bg-[#18191B] z-50 h-full text-gray-400 overflow-y-auto'>
