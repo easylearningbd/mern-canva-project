@@ -13,9 +13,12 @@ import MyImages from '../components/MyImages';
 import Projects from '../components/Projects';
 import Image from '../components/Image';
 import CreateComponent from '../components/CreateComponent';
-
+import api from '../utils/api'
+import { useParams } from 'react-router-dom';
 
 const Main = () => {
+
+    const { design_id } = useParams()
 
     const [state, setState] = useState('')
     const [current_component , setCurrentComponent] = useState('')
@@ -308,6 +311,17 @@ const Main = () => {
         setCurrentComponent(style)
         setComponents([...components, style])
     }
+
+    useEffect(() => {
+        const get_design = async () => {
+            try {
+                const { data } = await api.get(`/api/user-design/${design_id}`)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        get_design()
+    },[design_id])
 
 
 

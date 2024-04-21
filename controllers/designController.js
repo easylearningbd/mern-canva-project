@@ -31,6 +31,17 @@ class designController {
     }
     // End Method 
 
+    get_user_design = async(req,res) => {
+        const {design_id } = req.params
+         try {
+            const design = await designModel.findById(design_id)
+            return res.status(200).json({design: design.components })
+         } catch (error) {
+            return res.status(500).json({message: error.message })
+         }
+    }
+      // End Method 
+
 }
 
 module.exports = new designController()
