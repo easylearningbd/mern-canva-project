@@ -15,6 +15,7 @@ import Image from '../components/Image';
 import CreateComponent from '../components/CreateComponent';
 import api from '../utils/api'
 import { useParams } from 'react-router-dom';
+import BackgroundImages from '../components/BackgroundImages';
 
 const Main = () => {
 
@@ -423,14 +424,7 @@ const Main = () => {
             }
             {
                 state === 'background' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'>
-           <div className='grid grid-cols-2 gap-2'>
-            {
-                [1,2,3,4,5,6].map((img, i) => <div onClick={() => setImage('http://localhost:5173/canva.png') } key={i} className='w-full h-[90px] overflow-hidden rounded-sm cursor-pointer'>
-                <img className='w-full h-full object-fill' src="http://localhost:5173/canva.png" alt="" />
-                </div>
-                )
-            }
-            </div>
+                <BackgroundImages type='background' setImage={setImage} />
                     
                 </div>
             }
