@@ -316,6 +316,18 @@ const Main = () => {
         const get_design = async () => {
             try {
                 const { data } = await api.get(`/api/user-design/${design_id}`)
+                console.log(data)
+                const {design} = data
+
+                for (let i = 0; i < design.length; i++) {
+                    design[i].setCurrentComponent = (a) => setCurrentComponent(a)   
+                    design[i].moveElement = moveElement 
+                    design[i].resizeElement = resizeElement 
+                    design[i].rotateElement = rotateElement 
+                    design[i].remove_background = remove_background
+                                         
+                }
+                setComponents(design)
             } catch (error) {
                 console.log(error)
             }
