@@ -402,8 +402,8 @@ const Main = () => {
                 </div>
             }
             {
-                state === 'image' && <MyImages/>  
-            }
+                state === 'image' && <MyImages add_image={add_image} />  
+            } 
             {
                 state === 'text' && <div>
                     <div className='grid grid-cols-1 gap-2'>
