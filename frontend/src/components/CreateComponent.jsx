@@ -110,7 +110,7 @@ const CreateComponent = ({ info, current_component,removeComponent}) => {
         html = <div id={randValue} onClick={() => info.setCurrentComponent(info)} style={{ 
             left: info.left + 'px',
             top: info.top + 'px',
-            z_index: info.z_index,
+            zIndex: info.z_index,
             transform: info.rotate ? `rotate(${info.rotate}deg)` : 'rotate(0deg)',
             
             padding: info.padding + 'px',
