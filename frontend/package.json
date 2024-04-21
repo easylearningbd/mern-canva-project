@@ -19,6 +19,7 @@
     "react-multi-carousel": "^2.8.4",
     "react-router-dom": "^6.22.3",
     "react-spinners": "^0.13.8",
+    "react-use-downloader": "^1.2.8",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
