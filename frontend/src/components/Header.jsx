@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as htmlToImage from 'html-to-image'
 import api from '../utils/api'
+import toast from 'react-hot-toast'
 
 const Header = ({components,design_id}) => {
 
@@ -25,11 +26,11 @@ const Header = ({components,design_id}) => {
         try {
          setLoader(true)
          const {data} = await api.put(`/api/update-user-design/${design_id}`,formData)
-         
+         toast.success(data.message)
          setLoader(false)                
         } catch (error) {
             setLoader(false)  
-            console.log(error.response.data)
+            toast.error(error.response.data.message)
         }
     }
 }
