@@ -2,6 +2,7 @@ const {formidable} = require('formidable')
 const cloudinary = require('cloudinary').v2
 const designModel = require('../models/designModel')
 const userImageModel = require('../models/userImageModel')
+const {mongo: { ObjectId } } = require('mongoose')
 
 class designController {
 
@@ -109,7 +110,19 @@ class designController {
         
     }
 
-        // End Method 
+   // End Method
+    
+  get_user_image = async (req, res) => {
+    const { _id } = req.userInfo
+    try {
+        const images = await userImageModel.find({user_id: new ObjectId(_id) })
+        return res.status(200).json({ images })
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
+
+  }   
+   // End Method   
 
 }
 

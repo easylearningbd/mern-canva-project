@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from './Image';
 import api from '../utils/api'
 import BarLoader from 'react-spinners/BarLoader'
@@ -27,6 +27,18 @@ const MyImages = ({add_image}) => {
         }
     }
 
+    useEffect(() => {
+        const get_images = async () => {
+            try {
+                const {data} = await api.get('/api/get-user-image')
+                setImages(data.images)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        get_images()
+    },[])
+
     return (
         <div>
             <div className='w-full h-[40px] flex justify-center items-center bg-purple-500 rounded-md text-white mb-3'>
@@ -41,7 +53,7 @@ const MyImages = ({add_image}) => {
         }
 
         <div className='h-[80vh] overflow-x-auto flex justify-start items-start scrollbar-hide'>
-            <Image/>
+            <Image add_image={add_image} images={images} />
             </div>    
             
         </div>
