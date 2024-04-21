@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 
 const MyImages = ({add_image}) => {
 
+    const [images, setImages] = useState([])
     const [loader, setLoader] = useState(false)
 
     const image_upload = async (e) => {
@@ -17,6 +18,7 @@ const MyImages = ({add_image}) => {
             try {
                 setLoader(true)
                 const { data } = await api.post('/api/add-user-image',formData)
+                setImages([...images,data.userImage])
                 setLoader(false)
             } catch (error) {
                 setLoader(false)

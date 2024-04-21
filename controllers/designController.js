@@ -1,6 +1,7 @@
 const {formidable} = require('formidable')
 const cloudinary = require('cloudinary').v2
 const designModel = require('../models/designModel')
+const userImageModel = require('../models/userImageModel')
 
 class designController {
 
@@ -82,6 +83,33 @@ class designController {
         
     }
     // End Method 
+
+    add_user_image = async (req,res) => {
+        const {_id} = req.userInfo
+        const form = formidable({});
+
+        cloudinary.config({
+            cloud_name: process.env.cloud_name,
+            api_key: process.env.api_key,
+            api_secret: process.env.api_secret,
+        })
+        try {
+            const [_,files] = await form.parse(req);
+            const { image } = files
+            const { url } = await cloudinary.uploader.upload(image[0].filepath)
+
+            const userImage = await userImageModel.create({
+                user_id: _id,
+                image_url: url
+            })
+            return res.status(201).json({ userImage })
+        } catch (error) {
+            return res.status(500).json({ message: error.message }) 
+        }
+        
+    }
+
+        // End Method 
 
 }
 
