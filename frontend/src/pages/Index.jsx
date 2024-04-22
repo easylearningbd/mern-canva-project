@@ -3,6 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { BiLogoGmail } from "react-icons/bi";
 import { FaFacebook } from "react-icons/fa";
 import api from '../utils/api';
+import toast from 'react-hot-toast';
 
 const Index = () => {
 
@@ -42,7 +43,7 @@ const Index = () => {
 
         } catch (error) {
             setLoader(false)
-            console.log(error.response)
+           toast.error(error.response.data.message)
         }
         
     }
@@ -67,7 +68,7 @@ const Index = () => {
 
         } catch (error) {
             setLoader(false)
-            console.log(error.response)
+            toast.error(error.response.data.message)
         }
         
     }
