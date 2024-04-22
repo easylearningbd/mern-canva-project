@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaTrashAlt } from "react-icons/fa";
 import Item from './Home/Item';
 import api from '../utils/api'
+import toast from 'react-hot-toast';
 
 const Home = () => {
 
@@ -54,17 +55,29 @@ const Home = () => {
         })
       }
 
-      useEffect(() => {
-        const get_user_design = async () => {
-            try {
-                const {data} = await api.get('/api/user-designs')
-                setDesign(data.designs)
-            } catch (error) {
-                console.log(error)
-            }
+       
+    const get_user_design = async () => {
+        try {
+            const {data} = await api.get('/api/user-designs')
+            setDesign(data.designs)
+        } catch (error) {
+            console.log(error)
         }
+    }
+         
+    useEffect(() => {
         get_user_design()
     },[])
+
+    const delete_design = async (design_id) => {
+        try {
+            const { data } = await api.put(`/api/delete-user-image/${design_id}`)
+            toast.success(data.message)
+            get_user_design()
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
 
 
     return (
@@ -111,7 +124,7 @@ const Home = () => {
             transitionDuration={500}
         >
             {
-                designs.map((d,i) => <Item design={d} key={i} />
+                designs.map((d,i) => <Item delete_design={delete_design} design={d} key={i} />
                 )
             } 
         </Carousel>

@@ -164,6 +164,16 @@ class designController {
   }   
    // End Method   
 
+   delete_user_image = async (req, res) => {
+    const {design_id} = req.params;
+    try {
+        await designModel.findByIdAndDelete(design_id)
+        return res.status(200).json({ message: 'Design Delete Succees' }) 
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
+   }
+// End Method   
 
 }
 
