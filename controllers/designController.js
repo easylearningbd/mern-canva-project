@@ -186,6 +186,25 @@ get_templates = async (req, res) => {
 }
 // End Method  
 
+add_user_template = async (req,res) => {
+    const { template_id } = req.params
+    const { _id } = req.userInfo
+
+    try {
+        const template = await templateModel.findById(template_id)
+        const design = await designModel.create({
+            user_id:_id,
+            components: template.components,
+            image_url: template.image_url
+        }) 
+        return res.status(200).json({ design })
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
+
+}
+// End Method  
+
 }
 
 module.exports = new designController()
