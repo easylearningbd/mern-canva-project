@@ -416,7 +416,7 @@ const Main = () => {
                 </div>
             }
             {
-                state === 'project' &&  <Projects />
+                state === 'project' &&  <Projects type='main' design_id={design_id} />
             }
             {
                 state === 'initImage' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'> 
