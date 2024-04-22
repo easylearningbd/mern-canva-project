@@ -20,6 +20,10 @@ const Layout = () => {
         })
       }
 
+      const logout = () => {
+        localStorage.removeItem('canva_token')
+        window.location.href = '/'
+      }
 
     return (
 <div className='bg-[#18191b] min-h-screen w-full '>
@@ -54,9 +58,9 @@ const Layout = () => {
                 </Link>
             </li>
             <li>
-                <Link className='p-2 cursor-pointer'>
+                <div onClick={logout} className='p-2 cursor-pointer'>
                 <span>Logout </span>
-                </Link>
+                </div>
             </li>
         </ul>
 
