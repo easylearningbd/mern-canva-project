@@ -15,5 +15,7 @@ router.get('/design-images',auth,designController.get_design_image)
 router.get('/user-designs',auth,designController.get_user_designs)
 router.put('/delete-user-image/:design_id',auth,designController.delete_user_image)
 
+router.get('/templates',auth,designController.get_templates)
+
 
 module.exports = router

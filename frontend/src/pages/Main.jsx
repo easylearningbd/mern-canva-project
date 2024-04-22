@@ -391,7 +391,7 @@ const Main = () => {
             <MdKeyboardArrowLeft />
             </div>
             {
-                state === 'design' && <div className='grid grid-cols-2 gap-2'>
+                state === 'design' && <div>
                     <TemplateDesign type='main' />
                 </div>
             }

@@ -175,6 +175,11 @@ class designController {
    }
 // End Method   
 
+get_templates = async (req, res) => {
+
+}
+// End Method  
+
 }
 
 module.exports = new designController()

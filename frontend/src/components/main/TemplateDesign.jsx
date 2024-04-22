@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../utils/api'
 
-const TemplateDesign = () => {
+const TemplateDesign = ({type}) => {
+
+    const [templates, setTemplates] = useState([])
+
+    useEffect(() => {
+        const get_tamplates = async () => {
+            try {
+                const {data} = await api.get('/api/templates')
+                setTemplates(data.templates)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        get_tamplates()
+    },[])
+
+
+
+
+
     return (
         <>
             {
@@ -9,7 +29,7 @@ const TemplateDesign = () => {
                 </div>
                 )
             }    
-        </>
+        </> 
     );
 };
 
