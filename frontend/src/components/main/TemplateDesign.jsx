@@ -23,12 +23,17 @@ const TemplateDesign = ({type}) => {
 
     return (
         <>
+        <div className={`grid gap-2 ${type ? "grid-cols-2" : 'grid-cols-4 mt-5' }`}>
             {
-                [1,2,3,4].map((design,i) => <div className={`group w-full rounded-md overflow-hidden bg-[#ffffff] cursor-pointer`}>
-                    <img className='w-full h-full' src="http://localhost:5173/canva.png" alt="" />
-                </div>
-                )
-            }    
+                templates.map((design, i) => <div className={`relative cursor-pointer group w-full ${type ? "h-[100px]" : "h-[170px] px-4" } `}>
+                    <div className={`w-full h-full block bg-slate-400 rounded-md ${type ? '' : 'p-4'} `}>
+                <img className='w-full h-full rounded-md overflow-hidden' src={design.image_url} alt="" />
+                    </div>
+                </div> )
+            }
+
+        </div>
+            
         </> 
     );
 };

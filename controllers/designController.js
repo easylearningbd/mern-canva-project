@@ -5,6 +5,7 @@ const userImageModel = require('../models/userImageModel')
 
 const designImageModel = require('../models/designImageModel')
 const backgroundImageModel = require('../models/backgroundImageModel')
+const templateModel = require('../models/templateModel')
 const {mongo: { ObjectId } } = require('mongoose')
 
 class designController {
@@ -176,7 +177,12 @@ class designController {
 // End Method   
 
 get_templates = async (req, res) => {
-
+    try {
+        const templates = await templateModel.find({}).sort({ createdAt: -1 })
+        return res.status(200).json({ templates })
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
 }
 // End Method  
 
