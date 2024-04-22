@@ -16,6 +16,7 @@ import CreateComponent from '../components/CreateComponent';
 import api from '../utils/api'
 import { useParams } from 'react-router-dom';
 import BackgroundImages from '../components/BackgroundImages';
+import InitialImage from '../components/InitialImage';
 
 const Main = () => {
 
@@ -418,8 +419,8 @@ const Main = () => {
                 state === 'project' &&  <Projects />
             }
             {
-                state === 'initImage' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'>
-                    <Image add_image={add_image} />
+                state === 'initImage' && <div className='h-[88vh] overflow-x-auto flex justify-start items-start scrollbar-hide'> 
+                    <InitialImage add_image={add_image}/>
                 </div>
             }
             {
