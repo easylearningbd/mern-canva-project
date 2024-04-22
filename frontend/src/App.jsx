@@ -1,4 +1,4 @@
-import { createBrowserRouter,RouterProvider,} from "react-router-dom";
+import { createBrowserRouter,Navigate,RouterProvider,} from "react-router-dom";
 import Index from "./pages/Index";
 import Layout from "./pages/Layout";
 import Home from "./components/Home";
@@ -31,11 +31,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/design/create',
-    element: <CreateDesign/>
+    element: userInfo ? <CreateDesign/> : <Navigate to='/' />
   },
   {
     path: '/design/:design_id/edit',
-    element: <Main/>
+    element: userInfo ? <Main/> : <Navigate to='/' />
   }
 
 ])
