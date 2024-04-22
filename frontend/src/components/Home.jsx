@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrashAlt } from "react-icons/fa";
-
+import Item from './Home/Item';
+import api from '../utils/api'
 
 const Home = () => {
 
+    const [designs, setDesign] = useState([])
     const navigate = useNavigate()
     const [show, setShow] = useState(false)
     const [state, setState] = useState({
@@ -51,6 +53,18 @@ const Home = () => {
             } 
         })
       }
+
+      useEffect(() => {
+        const get_user_design = async () => {
+            try {
+                const {data} = await api.get('/api/user-designs')
+                setDesign(data.designs)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        get_user_design()
+    },[])
 
 
     return (
@@ -97,14 +111,7 @@ const Home = () => {
             transitionDuration={500}
         >
             {
-                [1,2,3,4,5,6,7,8].map((d,i) => <div className='relative group w-full h-[170px] px-2'>
-                <Link className='w-full h-full block bg-slate-100 p-4 rounded-md'>
-                    <img className='w-full h-full rounded-md overflow-hidden' src="http://localhost:5173/canva.png" alt="" />
-                </Link>
-                <div className='absolute hidden cursor-pointer top-1 right-2 text-red-500 p-2 transition-all duration-500 group-hover:block'>
-                <FaTrashAlt />
-                </div>
-            </div>
+                designs.map((d,i) => <Item design={d} key={i} />
                 )
             } 
         </Carousel>

@@ -152,6 +152,19 @@ class designController {
  // End Method 
 
 
+ get_user_designs = async (req, res) => {
+    const { _id } = req.userInfo
+    try {
+        const designs = await designModel.find({user_id: new ObjectId(_id) }).sort({ createdAt: -1})
+        return res.status(200).json({ designs })
+    } catch (error) {
+        return res.status(500).json({ message: error.message }) 
+    }
+
+  }   
+   // End Method   
+
+
 }
 
 module.exports = new designController()

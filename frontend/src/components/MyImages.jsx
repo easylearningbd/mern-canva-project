@@ -26,7 +26,7 @@ const MyImages = ({add_image}) => {
             }
         }
     }
-
+ 
     useEffect(() => {
         const get_images = async () => {
             try {
