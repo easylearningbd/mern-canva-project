@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
@@ -8,6 +8,18 @@ import { LuLayoutTemplate } from "react-icons/lu";
 const Layout = () => {
     const [show,setShow] = useState(false)
     const {pathname} = useLocation() 
+    const navigate = useNavigate()
+
+    const create = () => {
+        navigate('/design/create',{
+            state: {
+                type: 'create',
+                width: 600,
+                height: 450
+            } 
+        })
+      }
+
 
     return (
 <div className='bg-[#18191b] min-h-screen w-full '>
@@ -19,8 +31,8 @@ const Layout = () => {
      </div>
 
     <div className='flex gap-4 justify-center items-center relative'>
-        <button className='py-2 px-2 overflow-hidden text-center bg-[#8b3dff] text-white rounded-[3px] font-medium'>Create a Design
-        </button>
+        <button onClick={create} className='py-2 px-2 overflow-hidden text-center bg-[#8b3dff] text-white rounded-[3px] font-medium'>Create a Design
+        </button> 
         <div onClick={() => setShow(!show)} className=' cursor-pointer'>
         <img className='w-[48px] h-[45px] rounded-full' src="https://templates-flatlogic.herokuapp.com/sing-app/html5/demo/img/people/a5.jpg" alt="" /> 
         </div>
